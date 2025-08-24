@@ -483,3 +483,241 @@ graph TB
 ```
 
 ---
+
+## Additional High-Value Patterns
+
+### 26. Serverless Architecture Pattern
+**Category:** Infrastructure/Scalability
+
+**Problem Statement:** Traditional server-based architectures require constant resource provisioning, maintenance overhead, and don't automatically scale with demand fluctuations.
+
+**Solution Approach:** Implement event-driven, stateless functions that automatically scale and are managed by cloud providers, paying only for actual execution time.
+
+**Context & Applicability:**
+- Event-driven applications
+- Variable or unpredictable workloads
+- Rapid prototyping requirements
+- Cost-sensitive applications
+- Microservices with clear boundaries
+
+**Benefits:**
+- Zero server management overhead
+- Automatic scaling and high availability
+- Pay-per-use cost model
+- Fast deployment and iteration
+- Built-in fault tolerance
+
+**Trade-offs / Limitations:**
+- Cold start latency issues
+- Vendor lock-in concerns
+- Limited execution time and memory
+- Complex debugging and monitoring
+- State management challenges
+
+**Example Use Case:** E-commerce order processing where serverless functions handle payment processing, inventory updates, and notification sending, scaling automatically during flash sales.
+
+```mermaid
+graph TB
+    A[API Gateway] --> B[Lambda Function 1<br/>Order Processing]
+    A --> C[Lambda Function 2<br/>Payment Processing]
+    A --> D[Lambda Function 3<br/>Inventory Update]
+    B --> E[DynamoDB]
+    C --> F[Payment Service]
+    D --> G[Inventory Database]
+    H[Event Bridge] --> B
+    H --> C
+    H --> D
+    I[CloudWatch] --> B
+    I --> C
+    I --> D
+```
+
+---
+
+### 27. Micro-Frontend Pattern
+**Category:** Integration/Scalability
+
+**Problem Statement:** Large frontend applications become difficult to maintain, deploy, and scale across multiple teams, creating bottlenecks in development and deployment.
+
+**Solution Approach:** Decompose frontend applications into smaller, independently deployable micro-applications that can be developed and maintained by different teams.
+
+**Context & Applicability:**
+- Large-scale web applications
+- Multiple development teams
+- Different technology stack requirements
+- Independent deployment needs
+- Complex user interfaces
+
+**Benefits:**
+- Team autonomy and parallel development
+- Technology diversity and flexibility
+- Independent deployment cycles
+- Better fault isolation
+- Easier maintenance and testing
+
+**Trade-offs / Limitations:**
+- Increased complexity in integration
+- Potential performance overhead
+- Shared state management challenges
+- Consistent UX maintenance difficulty
+- Bundle size and loading considerations
+
+**Example Use Case:** Enterprise HR platform where different teams manage recruitment, payroll, and performance modules as separate micro-frontends integrated into a unified shell application.
+
+```mermaid
+graph TB
+    A[Shell Application] --> B[Micro-Frontend 1<br/>User Management]
+    A --> C[Micro-Frontend 2<br/>Dashboard]
+    A --> D[Micro-Frontend 3<br/>Settings]
+    B --> E[User Service API]
+    C --> F[Analytics API]
+    D --> G[Configuration API]
+    H[Shared Components] --> B
+    H --> C
+    H --> D
+    I[Module Federation] --> A
+```
+
+---
+
+### 28. Data Mesh Pattern
+**Category:** Data
+
+**Problem Statement:** Centralized data platforms become bottlenecks, create data silos, and cannot scale with the diverse analytical needs of large organizations.
+
+**Solution Approach:** Implement decentralized data ownership with domain-oriented data products, federated governance, and self-serve data infrastructure platform.
+
+**Context & Applicability:**
+- Large organizations with diverse data needs
+- Multiple business domains
+- Scalable analytics requirements
+- Data democratization initiatives
+- Complex data governance needs
+
+**Benefits:**
+- Scalable data architecture
+- Domain expertise in data products
+- Reduced central bottlenecks
+- Improved data quality ownership
+- Faster time to insights
+
+**Trade-offs / Limitations:**
+- Complex governance coordination
+- Data discovery challenges
+- Potential inconsistency across domains
+- Higher infrastructure complexity
+- Skills and cultural transformation needs
+
+**Example Use Case:** Retail corporation where marketing, supply chain, and customer service domains each own their data products while sharing common infrastructure and governance standards.
+
+```mermaid
+graph TB
+    A[Data Infrastructure Platform] --> B[Marketing Domain]
+    A --> C[Supply Chain Domain]
+    A --> D[Customer Service Domain]
+    B --> E[Marketing Data Products]
+    C --> F[Logistics Data Products]
+    D --> G[Support Data Products]
+    H[Federated Governance] --> B
+    H --> C
+    H --> D
+    I[Data Catalog] --> E
+    I --> F
+    I --> G
+    J[Self-Serve Analytics] --> E
+    J --> F
+    J --> G
+```
+
+---
+
+### 29. Strangler Fig Pattern
+**Category:** Migration/Integration
+
+**Problem Statement:** Legacy system modernization requires gradual replacement without disrupting business operations or requiring big-bang migrations.
+
+**Solution Approach:** Gradually replace legacy system functionality by intercepting requests and routing them to new services while maintaining existing functionality during transition.
+
+**Context & Applicability:**
+- Legacy system modernization
+- Risk-averse migration requirements
+- Business continuity needs
+- Large monolithic applications
+- Gradual technology transformation
+
+**Benefits:**
+- Reduced migration risks
+- Business continuity maintenance
+- Incremental value delivery
+- Parallel development capability
+- Easier rollback options
+
+**Trade-offs / Limitations:**
+- Extended migration timeline
+- Complexity in routing logic
+- Data consistency challenges
+- Dual system maintenance
+- Integration complexity
+
+**Example Use Case:** Banking core system migration where new microservices gradually replace monolithic functions like account management, payments, and reporting while maintaining 24/7 operations.
+
+```mermaid
+graph TB
+    A[Client Requests] --> B[Proxy/Gateway]
+    B --> C[New Microservice 1<br/>Account Management]
+    B --> D[New Microservice 2<br/>Payments]
+    B --> E[Legacy System<br/>Remaining Functions]
+    F[Data Sync] --> C
+    F --> D
+    F --> E
+    G[Migration Progress] --> B
+    H[Routing Rules] --> B
+```
+
+---
+
+### 30. Edge Computing Pattern
+**Category:** Infrastructure/Performance
+
+**Problem Statement:** Centralized cloud processing creates latency issues for real-time applications and generates excessive data transfer costs for IoT and mobile applications.
+
+**Solution Approach:** Deploy computing resources closer to data sources and end users, processing data at network edges to reduce latency and bandwidth usage.
+
+**Context & Applicability:**
+- IoT and sensor data processing
+- Real-time application requirements
+- Bandwidth-constrained environments
+- Geographic distribution needs
+- Regulatory data residency requirements
+
+**Benefits:**
+- Reduced latency and improved performance
+- Lower bandwidth costs
+- Better data privacy and security
+- Improved reliability and availability
+- Local processing capabilities
+
+**Trade-offs / Limitations:**
+- Distributed infrastructure complexity
+- Edge device management overhead
+- Limited processing capabilities
+- Security management challenges
+- Synchronization complexity
+
+**Example Use Case:** Smart manufacturing where edge servers process machine sensor data locally for real-time quality control while sending aggregated data to central cloud for analytics.
+
+```mermaid
+graph TB
+    A[IoT Devices/Sensors] --> B[Edge Computing Nodes]
+    B --> C[Local Processing]
+    B --> D[Local Storage]
+    C --> E[Real-time Actions]
+    B --> F[Data Aggregation]
+    F --> G[Central Cloud]
+    G --> H[Global Analytics]
+    G --> I[Machine Learning Models]
+    I --> B
+    J[Edge Management] --> B
+```
+
+---
