@@ -3,12 +3,12 @@
 ---
 ## 📋 Table of Contents
 1. [Application & System Integration](application--system-integration.md)
-2. [Infrastructure & Cloud Deployment](infrastructure--cloud-deployment)
-3. [Security & Compliance](security--compliance)
-4. [Data & Analytics](data--analytics)
-5. [Scalability & Performance](scalability--performance)
-6. [Reliability & Disaster Recovery](reliability--disaster-recovery)
-7. [DevOps & Automation](devops--automation)
+2. [Infrastructure & Cloud Deployment](infrastructure--cloud-deployment.md)
+3. [Security & Compliance](security--compliance.md)
+4. [Data & Analytics](data--analytics.md)
+5. [Scalability & Performance](scalability--performance.md)
+6. [Reliability & Disaster Recovery](reliability--disaster-recovery.md)
+7. [DevOps & Automation](devops--automation.md)
 ---
 
 ## 📚 Quick Reference Summary
